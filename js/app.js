@@ -72,12 +72,17 @@ function indiceColumnas(headers) {
 }
 
 function normalizarFila(fila, columnas) {
-  return Object.fromEntries(
+  const investigador = Object.fromEntries(
     Object.entries(CAMPOS).map(([numero, clave]) => [
       clave,
       (fila[columnas.get(Number(numero))] ?? '').trim(),
     ])
   );
+
+  return {
+    ...investigador,
+    id: (fila.ID ?? '').trim(),
+  };
 }
 
 function agregarGrupo(contenedor, grupo, investigador) {
@@ -119,25 +124,54 @@ function mostrarFicha(investigador) {
 }
 
 async function iniciar() {
-  const correo = new URLSearchParams(window.location.search).get('correo')?.trim().toLowerCase();
-  if (!correo) return mostrarEstado('Falta el correo en la URL de la ficha.');
+  const id = new URLSearchParams(window.location.search)
+    .get('id')
+    ?.trim();
+
+  if (!id) {
+    return mostrarEstado('Falta el ID en la URL de la ficha.');
+  }
 
   try {
     const response = await fetch('./assets/researchers-list.csv');
-    if (!response.ok) throw new Error(`No se pudo cargar el CSV (HTTP ${response.status})`);
+
+    if (!response.ok) {
+      throw new Error(
+        `No se pudo cargar el CSV (HTTP ${response.status})`
+      );
+    }
+
     const filas = parseCSV(await response.text());
-    if (!filas.length) throw new Error('El CSV no contiene investigadores');
+
+    if (!filas.length) {
+      throw new Error('El CSV no contiene investigadores');
+    }
+
+    if (!Object.hasOwn(filas[0], 'ID')) {
+      throw new Error('El CSV no tiene una columna llamada "ID"');
+    }
+
     const columnas = indiceColumnas(Object.keys(filas[0]));
+
     const coincidencias = filas
       .map(fila => normalizarFila(fila, columnas))
-      .filter(persona => persona.correoInstitucional.toLowerCase() === correo);
-    if (!coincidencias.length) return mostrarEstado('No se encontró una ficha para ese correo.');
-    if (coincidencias.length > 1) throw new Error('El correo aparece más de una vez en el CSV');
+      .filter(investigador => investigador.id === id);
+
+    if (!coincidencias.length) {
+      return mostrarEstado('No se encontró una ficha para ese ID.');
+    }
+
+    if (coincidencias.length > 1) {
+      throw new Error(`El ID "${id}" aparece más de una vez en el CSV`);
+    }
+
     mostrarFicha(coincidencias[0]);
   } catch (error) {
     console.error(error);
     mostrarEstado(`No se pudo mostrar la ficha: ${error.message}`);
   }
 }
+
+iniciar();
 
 iniciar();
