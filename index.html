@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ficha académica de investigadores">
+  <title>Ficha de investigador</title>
+  <link rel="stylesheet" href="./css/styles.css">
+  <script type="module" src="./js/app.js"></script>
+</head>
+<body>
+  <main class="contenedor">
+    <p class="identificador">Directorio de investigadores</p>
+    <p id="estado" class="estado" role="status">Cargando ficha…</p>
+    <article id="ficha" hidden>
+      <header class="cabecera">
+        <p class="sobretitulo">Ficha académica</p>
+        <h1 id="nombre"></h1>
+        <a id="correo" class="correo"></a>
+      </header>
+      <div id="contenido"></div>
+    </article>
+  </main>
+</body>
+</html>
