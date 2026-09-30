@@ -21,27 +21,33 @@ const CAMPOS = {
 };
 
 const GRUPOS = [
-  { titulo: 'Institución', campos: [
-    ['Universidad', 'universidad'],
-    ['Facultad, instituto o unidad académica', 'facultad'],
-    ['Departamento', 'departamento'],
-    ['Vínculo con la universidad', 'vinculoUniversidad'],
-    ['Grado académico máximo', 'gradoAcademico'],
-  ] },
-  { titulo: 'Investigación', campos: [
-    ['Disciplinas principales', 'disciplinas'],
-    ['Subdisciplina', 'subdisciplina'],
-    ['Palabras clave', 'palabrasClave'],
-    ['Sellos del proyecto', 'sellosProyecto'],
-    ['Metodologías y capacidades', 'metodologias'],
-  ] },
-  { titulo: 'Colaboración', campos: [
-    ['Experiencia interdisciplinaria o transdisciplinaria', 'experienciaInterTrans'],
-    ['Trabajo con actores externos', 'trabajaActoresExternos'],
-    ['Actores externos', 'actoresExternos'],
-    ['Aportes a un trabajo interdisciplinario', 'aportesInterdisciplinarios'],
-    ['Conocimientos y capacidades que busca', 'buscaCapacidades'],
-  ] },
+  {
+    titulo: 'Institución', campos: [
+      ['Universidad', 'universidad'],
+      ['Facultad, instituto o unidad académica', 'facultad'],
+      ['Departamento', 'departamento'],
+      ['Vínculo con la universidad', 'vinculoUniversidad'],
+      ['Grado académico máximo', 'gradoAcademico'],
+    ]
+  },
+  {
+    titulo: 'Investigación', campos: [
+      ['Disciplinas principales', 'disciplinas'],
+      ['Subdisciplina', 'subdisciplina'],
+      ['Palabras clave', 'palabrasClave'],
+      ['Sellos del proyecto', 'sellosProyecto'],
+      ['Metodologías y capacidades', 'metodologias'],
+    ]
+  },
+  {
+    titulo: 'Colaboración', campos: [
+      ['Experiencia interdisciplinaria o transdisciplinaria', 'experienciaInterTrans'],
+      ['Trabajo con actores externos', 'trabajaActoresExternos'],
+      ['Actores externos', 'actoresExternos'],
+      ['Aportes a un trabajo interdisciplinario', 'aportesInterdisciplinarios'],
+      ['Conocimientos y capacidades que busca', 'buscaCapacidades'],
+    ]
+  },
 ];
 
 const estado = document.getElementById('estado');
